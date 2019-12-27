@@ -1,6 +1,9 @@
 package gabor.csikos.reactive.web.webflux.document;
 
-import lombok.*;
+import gabor.csikos.reactive.web.webflux.dto.ItemDTO;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,4 +17,10 @@ public class Item {
     private String id;
     private String description;
     private Double price;
+
+    public Item(ItemDTO item) {
+        this.description = item.getDescription();
+        this.price = item.getPrice();
+        this.id = item.getId();
+    }
 }

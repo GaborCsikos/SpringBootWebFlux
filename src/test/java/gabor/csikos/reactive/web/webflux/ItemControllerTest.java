@@ -128,7 +128,7 @@ public class ItemControllerTest extends Integtest {
         double newPrice = 129.99;
         Item item = new Item(null, "Beats HeadPhones", newPrice);
 
-        webTestClient.put().uri("item/DEF")
+        webTestClient.put().uri("/item/DEF")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(Mono.just(item), Item.class)
@@ -137,4 +137,14 @@ public class ItemControllerTest extends Integtest {
 
     }
 
+    @Test
+    public void exceptionTest() {
+        webTestClient.get().uri("/flux/exception")
+                .exchange()
+                .expectStatus().is5xxServerError()
+                .expectBody(String.class)
+                .isEqualTo("Exception Occurred.");
+
+
+    }
 }
